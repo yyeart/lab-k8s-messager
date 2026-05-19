@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: uploads-pv
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  mountOptions:
+    - use_path_request_style
+  csi:
+    driver: ch.ctrox.csi.s3-driver
+    volumeHandle: uploads
+    nodePublishSecretRef:
+      name: csi-s3-secret
+      namespace: messager
+    nodeStageSecretRef:
+      name: csi-s3-secret
+      namespace: messager
+    volumeAttributes:
+      bucket: uploads
+      mounter: s3fs
+  storageClassName: ""
