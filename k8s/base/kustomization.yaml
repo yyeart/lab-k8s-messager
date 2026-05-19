@@ -1,0 +1,27 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - namespace.yaml
+  - configmap.yaml
+  - migrate-messages/job.yaml
+  - migrate-users/job.yaml
+
+  - postgres
+  - user-service
+  - message-service
+  - frontend
+  - bff
+  - minio
+  - s3-csi
+
+configMapGenerator:
+  - name: users-migrations-cm
+    namespace: messager
+    files:
+      - migrations/users/001_init.sql
+
+  - name: messages-migrations-cm
+    namespace: messager
+    files:
+      - migrations/messages/001_init.sql
+      - migrations/messages/002_add_file_name.sql

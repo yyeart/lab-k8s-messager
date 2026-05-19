@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: messager
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/yyeart/lab-k8s-messager
+    targetRevision: HEAD
+    path: k8s/overlays/dev
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: messager
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      
