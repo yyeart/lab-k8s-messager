@@ -9,6 +9,8 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   mountOptions:
+    - allow-delete
+    - url=http://minio.messager.svc.cluster.local:9000
     - use_path_request_style
   csi:
     driver: ch.ctrox.csi.s3-driver
@@ -20,6 +22,7 @@ spec:
       name: csi-s3-secret
       namespace: messager
     volumeAttributes:
+      endpoint: http://minio.messager.svc.cluster.local:9000
       bucket: uploads
-      mounter: s3fs
+      mounter: rclone
   storageClassName: ""
