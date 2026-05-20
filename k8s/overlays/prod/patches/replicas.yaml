@@ -24,4 +24,4 @@ kind: Deployment
 metadata:
   name: message-service
 spec:
-  replicas: 2
+  replicas: 3
