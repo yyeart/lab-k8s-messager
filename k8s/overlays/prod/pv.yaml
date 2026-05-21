@@ -23,7 +23,8 @@ spec:
       name: csi-s3-secret
       namespace: messager-prod
     volumeAttributes:
-      bucket: uploads-prod
+      bucketName: uploads-prod
       endpoint: http://minio.messager-prod.svc.cluster.local:9000
-      mounter: rclone
+      region: ""
+      mounter: s3fs
   storageClassName: ""

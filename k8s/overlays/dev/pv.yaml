@@ -13,6 +13,7 @@ spec:
     - allow-delete
     - use_path_request_style
     - url=http://minio.messager.svc.cluster.local:9000
+    - region=""
   csi:
     driver: ch.ctrox.csi.s3-driver
     volumeHandle: uploads
@@ -23,7 +24,9 @@ spec:
       name: csi-s3-secret
       namespace: messager
     volumeAttributes:
+      bucketName: uploads
       bucket: uploads
       endpoint: http://minio.messager.svc.cluster.local:9000
-      mounter: rclone
+      region: ""
+      mounter: s3fs
   storageClassName: ""
